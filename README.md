@@ -7,6 +7,7 @@ https://github.com/lm-sys/FastChat on Mac
 Download the `docker-compose.yaml` and run
 
 ```
+wget https://github.com/making/fastchat-on-mac/raw/main/docker-compose.yaml
 docker-compose up
 ```
 
