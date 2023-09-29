@@ -3,26 +3,30 @@ services:
   controller:
     image: ghcr.io/making/fastchat:latest
     pull_policy: always
-    ports:
-    - "21001:21001"
-    command: [ "-m", "fastchat.serve.controller", "--host", "0.0.0.0", "--port", "21001" ]
+    entrypoint: [ controller ]
     healthcheck:
       test: perl -mIO::Socket::INET -le 'exit(IO::Socket::INET->new(PeerAddr=>shift,PeerPort=>shift,Proto=>shift,Timeout=>1)?0:1)' 127.0.0.1 21001
+    ports:
+    - "21001:21001"
   gradio:
     image: ghcr.io/making/fastchat:latest
+    pull_policy: always
     depends_on:
       controller:
         condition: service_healthy
-    pull_policy: always
+    entrypoint: [ gradio ]
+    environment:
+      CONTROLLER_URL: http://controller:21001
     ports:
     - "7860:7860"
-    command: [ "-m", "fastchat.serve.gradio_web_server", "--host", "0.0.0.0", "--port", "7860", "--controller-url", "http://controller:21001" ]
   openai:
     image: ghcr.io/making/fastchat:latest
+    pull_policy: always
     depends_on:
       controller:
         condition: service_healthy
-    pull_policy: always
+    entrypoint: [ openai ]
+    environment:
+      CONTROLLER_ADDRESS: http://controller:21001
     ports:
     - "8000:8000"
-    command: [ "-m", "fastchat.serve.openai_api_server", "--controller-address", "http://controller:21001", "--host", "0.0.0.0", "--port", "8000" ]
