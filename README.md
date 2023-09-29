@@ -13,13 +13,14 @@ docker-compose up
 
 It launches controller, gradio (Web UI, optional), and openai api server. These do not use GPU, so it is easy to start them with docker.
 
-Then
+
+Next, start the model worker outside of docker and specify the `--device mps` option to take advantage of Metal GPU.
 
 ```
 pip3 install "fschat[model_worker,webui]"
 ```
 
-Start the model worker outside of docker and specify the `--device mps` option to take advantage of Metal GPU.
+Then
 
 ```
 python3 -m fastchat.serve.model_worker --port 21002 --model-path lmsys/vicuna-7b-v1.3 --device mps --load-8bit --controller-address http://localhost:21001 --worker-address http://host.docker.internal:21002
