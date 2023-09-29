@@ -1,8 +1,8 @@
-# FastChat on Mac (M2)
+# FastChat on Mac (Apple Silicon)
 
 https://github.com/lm-sys/FastChat on Mac
 
-## How to run OpenAI compatible FastChat server on Mac (M2) with its Metal GPU
+## How to run OpenAI compatible FastChat server on Mac (Apple Silicon) with its Metal GPU
 
 Download the `docker-compose.yaml` and run
 
