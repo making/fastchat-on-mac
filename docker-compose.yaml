@@ -1,7 +1,7 @@
 version: "3.9"
 services:
   controller:
-    image: ghcr.io/making/fastchat:latest
+    image: ghcr.io/making/fastchat@sha256:6c9884dae775a7d814888c762a5fa55b818f681b88d598e5537bc9876e740d77
     pull_policy: always
     entrypoint: [ controller ]
     healthcheck:
@@ -9,7 +9,7 @@ services:
     ports:
     - "21001:21001"
   gradio:
-    image: ghcr.io/making/fastchat:latest
+    image: ghcr.io/making/fastchat@sha256:6c9884dae775a7d814888c762a5fa55b818f681b88d598e5537bc9876e740d77
     pull_policy: always
     depends_on:
       controller:
@@ -20,7 +20,7 @@ services:
     ports:
     - "7860:7860"
   openai:
-    image: ghcr.io/making/fastchat:latest
+    image: ghcr.io/making/fastchat@sha256:6c9884dae775a7d814888c762a5fa55b818f681b88d598e5537bc9876e740d77
     pull_policy: always
     depends_on:
       controller:
